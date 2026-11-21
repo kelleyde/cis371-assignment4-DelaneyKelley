@@ -1,10 +1,28 @@
 <template>
   <div class="froth">
-    <div v-for=" in 5" class="foam"></div>
+    <div v-for=" in 5" class="foam" :style="bgColor"></div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { computed } from "vue"
+
+// source: https://vuejs.org/guide/components/props.html, https://www.youtube.com/watch?v=D0BxnIDo-FU
+const props = defineProps({creamerColor: {type: String}});
+
+// source: https://www.telerik.com/blogs/passing-variables-to-css-on-a-vue-component
+const bgColor = computed( () => {
+  console.log(props.creamerColor)
+  if(!props.creamerColor){
+    return false;
+  }
+  return{
+    "background-color": props.creamerColor
+  }
+})
+
+</script>
+
 <style lang="scss" scoped>
 .froth {
   overflow: visible;
